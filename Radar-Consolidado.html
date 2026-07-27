@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar do Mercado Automotivo — Consolidado | 27/07/2026</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#f4f5f7; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#111; line-height:1.55; }
+  .app { max-width:1180px; margin:0 auto; background:#fff; display:flex; min-height:100vh; }
+  /* rádios ocultos que controlam as abas (sem JavaScript) */
+  .app > input[type=radio]{ position:absolute; opacity:0; pointer-events:none; }
+  /* SIDEBAR */
+  .sidebar { width:250px; flex:none; background:#fff; border-right:1px solid #eee; border-top:6px solid #F58220; padding:22px 0; }
+  .sidebar .brand { padding:0 22px 18px; border-bottom:1px solid #f0f0f0; margin-bottom:12px; }
+  .sidebar .brand img { height:30px; display:block; margin-bottom:12px; }
+  .sidebar .brand .k { color:#F58220; font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; }
+  .sidebar .brand .t { font-size:15px; font-weight:800; margin-top:2px; }
+  .sidebar .brand .d { font-size:10px; color:#999; margin-top:5px; }
+  .tab { display:block; padding:12px 22px; font-size:13.5px; font-weight:600; color:#555; cursor:pointer; border-left:3px solid transparent; }
+  .tab:hover { background:#faf6f2; color:#111; }
+  .tab .num { display:inline-block; width:20px; color:#c8935e; font-weight:800; }
+  /* CONTENT */
+  .content { flex:1; padding:30px 36px; min-width:0; }
+  .printtitle { display:none; }
+  .panel { display:none; }
+  .panel h2 { font-size:20px; font-weight:800; margin-bottom:4px; display:flex; align-items:center; gap:10px; }
+  .panel h2:before { content:""; width:5px; height:21px; background:#F58220; border-radius:3px; }
+  .panel .sub { font-size:12.5px; color:#888; margin-bottom:18px; }
+  /* ativa a aba selecionada */
+  #t1:checked ~ .content #p1,#t2:checked ~ .content #p2,#t3:checked ~ .content #p3,#t4:checked ~ .content #p4,#t5:checked ~ .content #p5,#t6:checked ~ .content #p6,#t7:checked ~ .content #p7,#t8:checked ~ .content #p8{ display:block; }
+  #t1:checked ~ .sidebar label[for=t1],#t2:checked ~ .sidebar label[for=t2],#t3:checked ~ .sidebar label[for=t3],#t4:checked ~ .sidebar label[for=t4],#t5:checked ~ .sidebar label[for=t5],#t6:checked ~ .sidebar label[for=t6],#t7:checked ~ .sidebar label[for=t7],#t8:checked ~ .sidebar label[for=t8]{ background:#fff5ec; color:#b25e10; border-left-color:#F58220; }
+  /* KPIs */
+  .kpis { display:flex; flex-wrap:wrap; gap:14px; }
+  .kpi { flex:1 1 210px; border:1px solid #ececec; border-radius:12px; padding:16px 18px; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+  .kpi .l { font-size:11px; color:#777; text-transform:uppercase; letter-spacing:.5px; font-weight:600; }
+  .kpi .v { font-size:26px; font-weight:800; margin:5px 0 2px; }
+  .kpi .dt { font-size:12.5px; font-weight:700; color:#1a8a3a; }
+  .kpi .nt { font-size:10.5px; color:#999; margin-top:3px; }
+  /* Tabelas */
+  table { width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  th,td { text-align:left; padding:10px 10px; border-bottom:1px solid #eee; }
+  th { background:#faf6f2; color:#7a4a1e; font-size:11px; text-transform:uppercase; letter-spacing:.4px; }
+  td.num,th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  tr:last-child td { border-bottom:none; }
+  .bar-cell{ min-width:110px; }
+  .bar { height:8px; background:#F58220; border-radius:4px; display:inline-block; }
+  .bwrap{ display:flex; align-items:center; }
+  .cn { background:#fdecd8; color:#b25e10; font-size:9px; font-weight:800; padding:1px 6px; border-radius:8px; margin-left:5px; }
+  .note { background:#fff8f1; border:1px solid #f5d9bd; border-left:4px solid #F58220; border-radius:8px; padding:12px 15px; font-size:12.5px; color:#5c4326; margin-top:14px; line-height:1.6; }
+  .two{ display:flex; flex-wrap:wrap; gap:22px; } .two>div{ flex:1 1 300px; }
+  .ct{ font-size:13px; font-weight:800; margin-bottom:6px; } .ct.o{color:#1a8a3a;} .ct.r{color:#c0392b;} .ct.b{color:#b25e10;} .ct.x{color:#F58220;}
+  .insight{ display:flex; gap:14px; padding:14px 0; border-bottom:1px solid #f3f3f3; } .insight:last-child{border-bottom:none;}
+  .insight .n{ flex:none; width:30px; height:30px; background:#F58220; color:#fff; border-radius:8px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .insight h4{ font-size:14.5px; font-weight:800; margin-bottom:2px; } .insight p{ font-size:13px; color:#444; } .insight .im{ color:#7a4a1e; font-weight:700; }
+  .news{ border:1px solid #ececec; border-radius:11px; padding:15px 17px; margin-bottom:13px; }
+  .news .cat{ font-size:10.5px; font-weight:800; letter-spacing:.4px; margin-bottom:4px; text-transform:uppercase; }
+  .news h4{ font-size:15px; font-weight:800; margin-bottom:5px; } .news p{ font-size:13px; color:#333; } .news .src{ font-size:11.5px; color:#888; margin-top:7px; } .news .src a{ color:#F58220; text-decoration:none; }
+  .hi{color:#c0392b;} .me{color:#c07b12;}
+  /* PRINT / PDF: mostra tudo, esconde sidebar, gera marcadores por h1/h2 */
+  @media print {
+    @page { size:A4; margin:16mm 14mm; }
+    body{ background:#fff; }
+    .app{ display:block; max-width:none; }
+    .sidebar{ display:none; }
+    .content{ padding:0; }
+    .printtitle{ display:block; border-top:5px solid #F58220; padding-top:14px; margin-bottom:18px; }
+    .printtitle img{ display:none; }
+    .printtitle .wordmark{ display:block; font-size:22px; font-weight:800; color:#F58220; letter-spacing:.3px; margin-bottom:8px; }
+    .printtitle h1{ font-size:22px; }
+    .printtitle .d{ font-size:11px; color:#666; margin-top:4px; }
+    .panel{ display:block !important; page-break-before:always; padding-top:6px; }
+    .panel:first-of-type{ page-break-before:avoid; }
+    .kpi{ box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <input type="radio" name="tab" id="t1" checked>
+  <input type="radio" name="tab" id="t2">
+  <input type="radio" name="tab" id="t3">
+  <input type="radio" name="tab" id="t4">
+  <input type="radio" name="tab" id="t5">
+  <input type="radio" name="tab" id="t6">
+  <input type="radio" name="tab" id="t7">
+  <input type="radio" name="tab" id="t8">
+
+  <nav class="sidebar">
+    <div class="brand">
+      <img src="https://repo-site-aav-production.storage.googleapis.com/app/uploads/2023/07/logo-auto-avaliar.svg" alt="Auto Avaliar">
+      <div class="k">Radar do Mercado</div>
+      <div class="t">Veículos Leves &middot; Brasil</div>
+      <div class="d">Dados: junho/2026 &middot; gerado em 27/07/2026</div>
+    </div>
+    <label class="tab" for="t1"><span class="num">1</span>Visão Geral</label>
+    <label class="tab" for="t2"><span class="num">2</span>Marcas &amp; Share</label>
+    <label class="tab" for="t3"><span class="num">3</span>Canais</label>
+    <label class="tab" for="t4"><span class="num">4</span>Modelos</label>
+    <label class="tab" for="t5"><span class="num">5</span>Regional &amp; Eletrificação</label>
+    <label class="tab" for="t6"><span class="num">6</span>Momentum &amp; Bloco Chinês</label>
+    <label class="tab" for="t7"><span class="num">7</span>Notícias da Semana</label>
+    <label class="tab" for="t8"><span class="num">8</span>Insights Estratégicos</label>
+  </nav>
+
+  <main class="content">
+    <div class="printtitle">
+      <img src="https://repo-site-aav-production.storage.googleapis.com/app/uploads/2023/07/logo-auto-avaliar.svg" alt="Auto Avaliar">
+      <div class="wordmark">Auto Avaliar</div>
+      <h1>Radar do Mercado Automotivo — Veículos Leves</h1>
+      <div class="d">Dados de mercado: junho/2026 e 1ª quinzena de julho &middot; Gerado em 27 de julho de 2026</div>
+    </div>
+
+    <!-- 1 VISÃO GERAL -->
+    <section class="panel" id="p1">
+      <h2>Visão Geral</h2>
+      <div class="sub">Indicadores oficiais Fenabrave — automóveis e comerciais leves</div>
+      <div class="kpis">
+        <div class="kpi"><div class="l">Acumulado 2026</div><div class="v">1.359.107</div><div class="dt">&#9650; 20,11% vs 1&ordm; sem/2025</div><div class="nt">Melhor 1&ordm; semestre desde 2011</div></div>
+        <div class="kpi"><div class="l">Junho/2026</div><div class="v">260.467</div><div class="dt">&#9650; 28,82% vs jun/2025</div><div class="nt">&#9660; 1,34% vs maio</div></div>
+        <div class="kpi"><div class="l">Projeção 2026 (leves)</div><div class="v">+8,8%</div><div class="dt">&gt; 2,77 milhões un.</div><div class="nt">Revisada de +3%</div></div>
+        <div class="kpi"><div class="l">Penetração chinesas</div><div class="v">14,7%</div><div class="dt">BYD 4&ordf; marca do país</div><div class="nt">Acum. jan&ndash;abr/2026</div></div>
+      </div>
+      <div class="note">Panorama do mês: mercado de leves em ritmo recorde (melhor semestre desde 2011), com projeção anual revisada para cima e avanço estrutural das marcas chinesas. Detalhes em cada aba ao lado.</div>
+    </section>
+
+    <!-- 2 MARCAS & SHARE -->
+    <section class="panel" id="p2">
+      <h2>Marcas &amp; Share — 1&ordm; Semestre 2026</h2>
+      <div class="sub">Fonte oficial: Informativo Fenabrave Ed. 282 &middot; volume acumulado aproximado (participação &times; total do segmento)</div>
+      <table>
+        <thead><tr><th>#</th><th>Marca</th><th class="num">Vol. acum.</th><th class="num">Share acum.</th><th class="num">Share jun</th><th class="bar-cell">&nbsp;</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Fiat</td><td class="num">271.006</td><td class="num">19,94%</td><td class="num">18,84%</td><td><div class="bwrap"><span class="bar" style="width:100px"></span></div></td></tr>
+          <tr><td>2</td><td>Volkswagen</td><td class="num">224.933</td><td class="num">16,55%</td><td class="num">17,66%</td><td><div class="bwrap"><span class="bar" style="width:83px"></span></div></td></tr>
+          <tr><td>3</td><td>Chevrolet (GM)</td><td class="num">140.667</td><td class="num">10,35%</td><td class="num">10,25%</td><td><div class="bwrap"><span class="bar" style="width:52px"></span></div></td></tr>
+          <tr><td>4</td><td>BYD <span class="cn">CN</span></td><td class="num">99.079</td><td class="num">7,29%</td><td class="num">8,16%</td><td><div class="bwrap"><span class="bar" style="width:37px"></span></div></td></tr>
+          <tr><td>5</td><td>Hyundai</td><td class="num">96.768</td><td class="num">7,12%</td><td class="num">6,31%</td><td><div class="bwrap"><span class="bar" style="width:36px"></span></div></td></tr>
+          <tr><td>6</td><td>Toyota</td><td class="num">79.915</td><td class="num">5,88%</td><td class="num">5,57%</td><td><div class="bwrap"><span class="bar" style="width:29px"></span></div></td></tr>
+          <tr><td>7</td><td>Renault</td><td class="num">63.878</td><td class="num">4,70%</td><td class="num">4,17%</td><td><div class="bwrap"><span class="bar" style="width:24px"></span></div></td></tr>
+          <tr><td>8</td><td>Jeep</td><td class="num">56.403</td><td class="num">4,15%</td><td class="num">3,94%</td><td><div class="bwrap"><span class="bar" style="width:21px"></span></div></td></tr>
+          <tr><td>9</td><td>Honda</td><td class="num">53.549</td><td class="num">3,94%</td><td class="num">3,85%</td><td><div class="bwrap"><span class="bar" style="width:20px"></span></div></td></tr>
+          <tr><td>10</td><td>Caoa Chery <span class="cn">CN</span></td><td class="num">36.968</td><td class="num">2,72%</td><td class="num">2,75%</td><td><div class="bwrap"><span class="bar" style="width:14px"></span></div></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3 CANAIS -->
+    <section class="panel" id="p3">
+      <h2>Canais — Varejo &times; Venda Direta (Acumulado 2026)</h2>
+      <div class="sub">Participação (%) &middot; Fonte oficial: Informativo Fenabrave Ed. 282 (Varejo págs. 26-27; Venda Direta págs. 28-29)</div>
+      <div class="two">
+        <div>
+          <div class="ct x">Varejo — venda ao consumidor</div>
+          <table><tbody>
+            <tr><td>1 Volkswagen</td><td class="num">13,10%</td></tr>
+            <tr><td>2 Fiat</td><td class="num">11,69%</td></tr>
+            <tr><td>3 BYD <span class="cn">CN</span></td><td class="num">11,40%</td></tr>
+            <tr><td>4 Chevrolet (GM)</td><td class="num">8,75%</td></tr>
+            <tr><td>5 Toyota</td><td class="num">7,61%</td></tr>
+            <tr><td>6 Hyundai</td><td class="num">6,82%</td></tr>
+            <tr><td>7 Honda</td><td class="num">5,58%</td></tr>
+            <tr><td>8 Caoa Chery <span class="cn">CN</span></td><td class="num">5,25%</td></tr>
+            <tr><td>9 GWM <span class="cn">CN</span></td><td class="num">4,23%</td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <div class="ct b">Venda Direta — frota, locadora, PcD, gov.</div>
+          <table><tbody>
+            <tr><td>1 Fiat</td><td class="num">28,36%</td></tr>
+            <tr><td>2 Volkswagen</td><td class="num">20,08%</td></tr>
+            <tr><td>3 Chevrolet (GM)</td><td class="num">12,00%</td></tr>
+            <tr><td>4 Hyundai</td><td class="num">7,42%</td></tr>
+            <tr><td>5 Renault</td><td class="num">5,98%</td></tr>
+            <tr><td>6 Jeep</td><td class="num">5,17%</td></tr>
+            <tr><td>7 Toyota</td><td class="num">4,12%</td></tr>
+            <tr><td>8 BYD <span class="cn">CN</span></td><td class="num">3,08%</td></tr>
+            <tr><td>9 Nissan</td><td class="num">2,89%</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="note"><strong>Leitura estratégica:</strong> os canais quase se invertem. Na venda direta, Fiat (28,36%) e VW (20,08%) dominam e a BYD tem só 3,08%. No varejo, VW, Fiat e <strong>BYD (11,40%)</strong> ficam lado a lado — a BYD é força de varejo, o canal mais próximo do giro de concessionária e do futuro estoque de usados.</div>
+    </section>
+
+    <!-- 4 MODELOS -->
+    <section class="panel" id="p4">
+      <h2>Top 10 Modelos — Junho/2026</h2>
+      <div class="sub">Mercado total (autos + comerciais leves) &middot; Fonte oficial: Informativo Fenabrave Ed. 282 (pág. 6)</div>
+      <table>
+        <thead><tr><th>#</th><th>Modelo</th><th>Marca</th><th class="num">Emplac.</th><th class="bar-cell">&nbsp;</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Strada</td><td>Fiat</td><td class="num">14.303</td><td><div class="bwrap"><span class="bar" style="width:100%"></span></div></td></tr>
+          <tr><td>2</td><td>T-Cross</td><td>Volkswagen</td><td class="num">11.753</td><td><div class="bwrap"><span class="bar" style="width:82%"></span></div></td></tr>
+          <tr><td>3</td><td>Polo</td><td>Volkswagen</td><td class="num">10.939</td><td><div class="bwrap"><span class="bar" style="width:76%"></span></div></td></tr>
+          <tr><td>4</td><td>Argo</td><td>Fiat</td><td class="num">9.831</td><td><div class="bwrap"><span class="bar" style="width:69%"></span></div></td></tr>
+          <tr><td>5</td><td>Tera</td><td>Volkswagen</td><td class="num">9.289</td><td><div class="bwrap"><span class="bar" style="width:65%"></span></div></td></tr>
+          <tr><td>6</td><td>Onix</td><td>Chevrolet</td><td class="num">7.972</td><td><div class="bwrap"><span class="bar" style="width:56%"></span></div></td></tr>
+          <tr><td>7</td><td>HB20</td><td>Hyundai</td><td class="num">6.914</td><td><div class="bwrap"><span class="bar" style="width:48%"></span></div></td></tr>
+          <tr><td>8</td><td>Song</td><td>BYD <span class="cn">CN</span></td><td class="num">6.632</td><td><div class="bwrap"><span class="bar" style="width:46%"></span></div></td></tr>
+          <tr><td>9</td><td>Dolphin Mini</td><td>BYD <span class="cn">CN</span></td><td class="num">6.457</td><td><div class="bwrap"><span class="bar" style="width:45%"></span></div></td></tr>
+          <tr><td>10</td><td>Creta</td><td>Hyundai</td><td class="num">5.533</td><td><div class="bwrap"><span class="bar" style="width:39%"></span></div></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 5 REGIONAL & ELETRIFICAÇÃO -->
+    <section class="panel" id="p5">
+      <h2>Regional, Canais e Eletrificação — Junho/2026</h2>
+      <div class="sub">Regional: Informativo Fenabrave Ed. 282 (pág. 5) &middot; Eletrificação: InfoMoney (jul/2026)</div>
+      <div class="two">
+        <div>
+          <div class="ct x">Emplacamentos por região (A+B)</div>
+          <table><tbody>
+            <tr><td>Sudeste</td><td class="num">54,73%</td><td class="bar-cell"><div class="bwrap"><span class="bar" style="width:100%"></span></div></td></tr>
+            <tr><td>Sul</td><td class="num">17,85%</td><td><div class="bwrap"><span class="bar" style="width:33%"></span></div></td></tr>
+            <tr><td>Nordeste</td><td class="num">12,78%</td><td><div class="bwrap"><span class="bar" style="width:23%"></span></div></td></tr>
+            <tr><td>Centro-Oeste</td><td class="num">9,57%</td><td><div class="bwrap"><span class="bar" style="width:17%"></span></div></td></tr>
+            <tr><td>Norte</td><td class="num">5,07%</td><td><div class="bwrap"><span class="bar" style="width:9%"></span></div></td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <div class="ct b">Canais &amp; eletrificação</div>
+          <div class="kpis">
+            <div class="kpi" style="flex:1 1 100%"><div class="l">Mix do mês (mercado total)</div><div class="v" style="font-size:20px">49% Varejo / 51% Direta</div><div class="nt">Fonte: Fenabrave &middot; junho/2026</div></div>
+            <div class="kpi" style="flex:1 1 100%"><div class="l">Eletrificados (elétricos + híbridos)</div><div class="v" style="font-size:20px">10,7%</div><div class="dt">&#9650; 56,3% vs ano anterior</div><div class="nt">Fonte: InfoMoney (jul/2026). O informativo Fenabrave detalha motorização por cilindrada.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 MOMENTUM & BLOCO CHINÊS -->
+    <section class="panel" id="p6">
+      <h2>Momentum de Marcas &amp; Bloco Chinês — Junho/2026</h2>
+      <div class="sub">Momentum = participação do mês menos participação acumulada do ano (pontos percentuais). Base: Informativo Fenabrave Ed. 282</div>
+      <div class="two">
+        <div>
+          <div class="ct o">Ganharam share no mês</div>
+          <table><tbody>
+            <tr><td>Volkswagen</td><td class="num" style="color:#1a8a3a;font-weight:700">+1,11 p.p.</td></tr>
+            <tr><td>BYD <span class="cn">CN</span></td><td class="num" style="color:#1a8a3a;font-weight:700">+0,87 p.p.</td></tr>
+            <tr><td>Caoa Chery <span class="cn">CN</span></td><td class="num" style="color:#1a8a3a;font-weight:700">+0,03 p.p.</td></tr>
+          </tbody></table>
+          <div class="ct r" style="margin-top:12px">Perderam share no mês</div>
+          <table><tbody>
+            <tr><td>Fiat</td><td class="num" style="color:#c0392b;font-weight:700">&minus;1,10 p.p.</td></tr>
+            <tr><td>Hyundai</td><td class="num" style="color:#c0392b;font-weight:700">&minus;0,81 p.p.</td></tr>
+            <tr><td>Renault</td><td class="num" style="color:#c0392b;font-weight:700">&minus;0,53 p.p.</td></tr>
+            <tr><td>Toyota</td><td class="num" style="color:#c0392b;font-weight:700">&minus;0,31 p.p.</td></tr>
+            <tr><td>Jeep</td><td class="num" style="color:#c0392b;font-weight:700">&minus;0,21 p.p.</td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <div class="ct b">Bloco chinês consolidado</div>
+          <div class="kpis"><div class="kpi" style="flex:1 1 100%"><div class="l">Share das chinesas — junho (mercado total)</div><div class="v">18,2%</div><div class="dt">vs 14,7% no acum. jan&ndash;abr</div><div class="nt">Soma de BYD, Caoa Chery, GWM, Geely, Omoda/Jaecoo e GAC</div></div></div>
+          <table style="margin-top:6px"><thead><tr><th>Marca</th><th class="num">Share jun</th></tr></thead><tbody>
+            <tr><td>BYD</td><td class="num">8,16%</td></tr>
+            <tr><td>Caoa Chery</td><td class="num">2,75%</td></tr>
+            <tr><td>GWM</td><td class="num">2,58%</td></tr>
+            <tr><td>Geely</td><td class="num">2,24%</td></tr>
+            <tr><td>Omoda/Jaecoo</td><td class="num">1,86%</td></tr>
+            <tr><td>GAC</td><td class="num">0,57%</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 NOTÍCIAS -->
+    <section class="panel" id="p7">
+      <h2>Notícias da Semana</h2>
+      <div class="sub">Somente fontes de primeira linha &middot; julho/2026 &middot; atualizadas semanalmente</div>
+      <div class="news"><div class="cat hi">Mercado &middot; Impacto Alto</div><h4>Leves crescem 13% na 1ª quinzena de julho e acumulam +19,6% no ano</h4><p>106.158 emplacamentos nos primeiros 15 dias (vs 93.912 em 2025). Fiat lidera o parcial (19.040), seguida por VW, BYD, GM e Toyota; Strada é o mais procurado.</p><div class="src">Automotive Business &middot; jul/2026 &middot; <a href="https://www.automotivebusiness.com.br/noticias/emplacamentos-avancam-13-na-primeira-quinzena-de-julho">ver matéria</a></div></div>
+      <div class="news"><div class="cat hi">Montadoras &middot; Impacto Alto</div><h4>Stellantis inicia o novo Fiat Argo X em Betim dentro do ciclo de R$ 32 bi</h4><p>Primeiro produto totalmente novo do ciclo de R$ 32 bi para a América do Sul (R$ 14 bi para MG). Betim ganha 3&ordm; turno e capacidade de ~650 mil veículos/ano.</p><div class="src">AutoData &middot; 21/07/2026 &middot; <a href="https://www.autodata.com.br/noticias/2026/07/21/novo-fiat-argo-x-assegura-relevancia-de-betim-em-seus-50-anos/130073/">ver matéria</a></div></div>
+      <div class="news"><div class="cat hi">Chinesas &middot; Impacto Alto</div><h4>GWM inaugura fábrica em Iracemápolis e já planeja a segunda no Brasil</h4><p>Parte dos R$ 10 bi da Great Wall no país (R$ 4 bi até 2026). Decisão sobre a 2ª unidade a partir de meados de 2026. Eletrificados: 10,7% do mercado em julho (+56,3%).</p><div class="src">InfoMoney &middot; jul/2026 &middot; <a href="https://www.infomoney.com.br/politica/com-1a-fabrica-de-carros-recem-inaugurada-no-brasil-chinesa-gwm-planeja-a-2a/">ver matéria</a></div></div>
+      <div class="news"><div class="cat hi">Economia &middot; Impacto Alto</div><h4>Governo mantém imposto de 35% para elétricos importados e renova cota zero</h4><p>Gecex: kits SKD a 35% desde julho; CKD a 14% até o fim de 2026 e 35% em janeiro de 2027. Cota zero renovada beneficia quem monta no Brasil (BYD, GWM).</p><div class="src">InfoMoney &middot; jul/2026 &middot; <a href="https://www.infomoney.com.br/economia/governo-mantem-elevacao-de-tarifas-para-carros-eletricos-e-renova-cota-zero/">ver matéria</a></div></div>
+      <div class="news"><div class="cat me">Usados &middot; Impacto Médio</div><h4>Usados seguem aquecidos, mas elétricos e chineses ampliam a desvalorização</h4><p>Um índice aponta alta de 3,49% no 1&ordm; semestre; outro aponta queda (&minus;1,97% para combustão). Eletrificados e SUVs chineses lideram a desvalorização.</p><div class="src">InfoMoney / Exame &middot; jul/2026 &middot; <a href="https://www.infomoney.com.br/minhas-financas/carros-usados-seguem-em-alta-em-2026-mas-eletricos-ampliam-desvalorizacao/">InfoMoney</a> &middot; <a href="https://exame.com/invest/minhas-financas/preco-de-veiculos-usados-cai-no-primeiro-semestre-de-2026-mostra-estudo/">Exame</a></div></div>
+      <div class="news"><div class="cat me">Mercado &middot; Impacto Médio</div><h4>Fenabrave eleva projeção de leves para 2026 a +8,8% (2,77 milhões)</h4><p>Após o 1&ordm; semestre de +20,11%, a Fenabrave revisou a projeção de +3% para +8,8% — melhor desempenho desde 2011, impulsionado pelas chinesas.</p><div class="src">AutoIndústria / Agência Brasil &middot; 02/07/2026 &middot; <a href="https://www.autoindustria.com.br/2026/07/02/fenabrave-projeta-venda-de-277-milhoes-de-veiculos-leves-alta-de-88/">ver matéria</a></div></div>
+    </section>
+
+    <!-- 8 INSIGHTS -->
+    <section class="panel" id="p8">
+      <h2>5 Insights Estratégicos</h2>
+      <div class="sub">Leitura conectando os números de macro mercado às notícias da semana</div>
+      <div class="insight"><div class="n">1</div><div><h4>Mercado em ritmo recorde, mas com teto estrutural</h4><p>Leves +20,11% no semestre e +13% em julho, mas juros acima de 27% a.a. limitam o avanço. <span class="im">Implicação:</span> janela de captação de trade-in aberta agora, no pico do 0 km.</p></div></div>
+      <div class="insight"><div class="n">2</div><div><h4>A BYD é fenômeno de varejo, não de frota</h4><p>11,40% no varejo contra 3,08% na venda direta. <span class="im">Implicação:</span> o estoque de usados dos próximos 24 meses será fortemente chinês no varejo — precificação específica vira diferencial.</p></div></div>
+      <div class="insight"><div class="n">3</div><div><h4>A barreira tributária acelera a nacionalização chinesa</h4><p>Com o imposto de 35% no elétrico importado, GWM inaugurou fábrica e mira a 2ª; BYD produz em Camaçari. <span class="im">Implicação:</span> mais oferta local e mais usados chineses no funil do Marketplace B2B.</p></div></div>
+      <div class="insight"><div class="n">4</div><div><h4>Divergência entre índices de usados = risco e oportunidade</h4><p>Preço de usado subiu por um índice (+3,49%) e caiu por outro (&minus;1,97%). <span class="im">Implicação:</span> espaço para uma referência transacional única de precificação (dados).</p></div></div>
+      <div class="insight"><div class="n">5</div><div><h4>A onda de investimento eleva a complexidade da avaliação</h4><p>Stellantis (R$ 32 bi/AmSul), GWM e BYD apostam em eletrificação e híbrido-flex. <span class="im">Implicação:</span> avaliar exige dados técnicos e histórico de transação — quem tiver essa base captura valor.</p></div></div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
