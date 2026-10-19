@@ -1,0 +1,95 @@
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 01/09/2026 13:49:31,26
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+Removendo trava antiga do git (.git\index.lock)...
+"git" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+ERRO: falha no git add.
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 03/09/2026 11:24:07,94
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+Nada mudou no index.html. Nada a publicar.
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 03/09/2026 11:58:53,81
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+[main 9d19413] Radar do Mercado: atualizacao de 2026-09-03
+ 1 file changed, 36 insertions(+), 36 deletions(-)
+To https://github.com/berlangaconsultoria-jpg/Radar-Automotivo.git
+   c956c5d..9d19413  main -> main
+
+PUBLICADO. O site atualiza em cerca de um minuto:
+https://berlangaconsultoria-jpg.github.io/Radar-Automotivo/
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 03/09/2026 12:52:51,02
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+[main a33174e] Radar do Mercado: atualizacao de 2026-09-03
+ 1 file changed, 52 insertions(+), 15 deletions(-)
+To https://github.com/berlangaconsultoria-jpg/Radar-Automotivo.git
+   9d19413..a33174e  main -> main
+
+PUBLICADO. O site atualiza em cerca de um minuto:
+https://berlangaconsultoria-jpg.github.io/Radar-Automotivo/
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 03/09/2026 17:45:47,08
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+[main 509b523] Radar do Mercado: atualizacao de 2026-09-03
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+To https://github.com/berlangaconsultoria-jpg/Radar-Automotivo.git
+   a33174e..509b523  main -> main
+
+PUBLICADO. O site atualiza em cerca de um minuto:
+https://berlangaconsultoria-jpg.github.io/Radar-Automotivo/
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 14/09/2026 19:23:10,57
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+Nada mudou no index.html. Nada a publicar.
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 05/10/2026  9:15:00,82
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+Nada mudou no index.html. Nada a publicar.
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 12/10/2026 10:53:26,84
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+Nada mudou no index.html. Nada a publicar.
+
+============================================================
+Publicando Radar no GitHub Pages
+Data: 19/10/2026  9:15:03,60
+Pasta: C:\Users\diego\Desktop\GitHub\Radar-Automotivo
+============================================================
+git encontrado: "C:\Users\diego\AppData\Local\GitHubDesktop\app-3.6.4\resources\app\git\cmd\git.exe"
+Nada mudou no index.html. Nada a publicar.
